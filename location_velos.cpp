@@ -79,11 +79,18 @@ int main()
 
     cout << "Vous avez loué votre vélo pendant" << endl;
 
+    if (unf>0)
+    {
     cout <<unf << " heure(s) au tarif horaire de "
           <<1 << " franc(s)" << endl;
+    }
 
+    if(deuxf>0)
+    {
     cout <<deuxf<< " heure(s) au tarif horaire de "
       <<2 << " franc(s)" << endl;
+    }
+
 
     cout << "Le montant total à payer est de " << unf + (deuxf)* 2
          << " franc(s)." << endl;
