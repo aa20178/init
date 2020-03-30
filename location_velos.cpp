@@ -34,25 +34,43 @@ int main()
   {
       int unf(0);
       int deuxf(0);
+      
+
+
+
+
       if(debut<= 7 and fin>= 17)
       {
           unf = (7-debut) + (fin - 17);
           deuxf = 10;
       }
 
-      if(debut<= 7 and fin< 17)
+      else if(debut<= 7 and fin< 17 and fin > 7)
       {
           unf = (7-debut) ;
           deuxf =  (fin-7);
       }
 
-      if(debut> 7 and fin>= 17)
+      else if(debut<= 7 and fin< 17 and fin <= 7)
+      {
+          unf = (fin-debut) ;
+          deuxf = 0;
+      }
+
+
+      else if(debut> 7 and debut <= 17 and fin>= 17)
       {
           unf = (fin - 17);
           deuxf = (17 - debut) ;
       }
 
-      if(debut> 7 and fin<17)
+      else if(debut> 7 and debut > 17 and fin>= 17)
+      {
+          unf = (fin - debut);
+          deuxf = 0 ;
+      }
+
+      else if(debut> 7 and fin<17)
       {
           unf = 0;
           deuxf = (fin - debut) ;
