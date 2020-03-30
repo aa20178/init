@@ -8,8 +8,8 @@ int main()
      int chapeau(0);
      int foret(0);
 
-     cout << "Pensez Ã  un champignon : amanite tue-mouches, pied bleu, girolle," << endl
-     << "cÃ¨pe de Bordeaux, coprin chevelu ou agaric jaunissant." << endl << endl;
+     cout << "Pensez à  un champignon : amanite tue-mouches, pied bleu, girolle," << endl
+     << "cèpe de Bordeaux, coprin chevelu ou agaric jaunissant." << endl << endl;
 
      cout << "Est-ce que votre champignon a un chapeau convexe (1 : oui, 0 : non) ? ";
      cin >> chapeau ;
@@ -32,7 +32,7 @@ int main()
                if (lamelles == 0)
                {
                     cout << "==> Le champignon auquel vous pensez est ";
-                    cout << "le cÃ¨pe de Bordeaux";
+                    cout << "le cèpe de Bordeaux";
                }
                else
                {
