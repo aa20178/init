@@ -34,11 +34,7 @@ int main()
   {
       int unf(0);
       int deuxf(0);
-      
-
-
-
-
+    
       if(debut<= 7 and fin>= 17)
       {
           unf = (7-debut) + (fin - 17);

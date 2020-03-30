@@ -1,16 +1,73 @@
-  cout << "Pensez Ã  un champignon : amanite tue-mouches, pied bleu, girolle," << endl
-       << "cÃ¨pe de Bordeaux, coprin chevelu ou agaric jaunissant." << endl << endl;
-  
-  cout << "Est-ce que votre champignon a des lamelles (1 : oui, 0 : non) ? ";
-  cout << "Est-ce que votre champignon a un anneau (1 : oui, 0 : non) ? ";
-  cout << "Est-ce que votre champignon a un chapeau convexe (1 : oui, 0 : non) ? ";
-  cout << "Est-ce que votre champignon vit en forÃªt (1 : oui, 0 : non) ? ";
+#include <iostream>
+using namespace std;
 
-  cout << "==> Le champignon auquel vous pensez est ";
+int main()
+{
+     int lamelles(0);
+     int anneau(0);
+     int chapeau(0);
+     int foret(0);
 
-  cout << "l'agaric jaunissant";
-  cout << "l'amanite tue-mouches";
-  cout << "le cÃ¨pe de Bordeaux";
-  cout << "le coprin chevelu";
-  cout << "la girolle";
-  cout << "le pied bleu";
+     cout << "Pensez Ã  un champignon : amanite tue-mouches, pied bleu, girolle," << endl
+     << "cÃ¨pe de Bordeaux, coprin chevelu ou agaric jaunissant." << endl << endl;
+
+     cout << "Est-ce que votre champignon a un chapeau convexe (1 : oui, 0 : non) ? ";
+     cin >> chapeau ;
+     
+     if(chapeau == 0)
+     {
+          cout << "Est-ce que votre champignon vit en forÃªt (1 : oui, 0 : non) ? ";
+          cin >> foret ;
+
+          if(foret == 0)
+          {
+               cout << "==> Le champignon auquel vous pensez est ";
+               cout << "le coprin chevelu";
+          }
+          else if (foret == 1)
+          {
+               cout << "Est-ce que votre champignon a des lamelles (1 : oui, 0 : non) ? ";
+               cin >> lamelles ;
+               
+               if (lamelles == 0)
+               {
+                    cout << "==> Le champignon auquel vous pensez est ";
+                    cout << "le cÃ¨pe de Bordeaux";
+               }
+               else
+               {
+                    cout << "==> Le champignon auquel vous pensez est ";
+                    cout << "la girolle";
+               }
+          }
+     }
+
+     if(chapeau == 1)
+     {
+          cout << "Est-ce que votre champignon vit en forÃªt (1 : oui, 0 : non) ? ";
+          cin >> foret ;
+
+          if(foret == 0)
+          {
+               cout << "==> Le champignon auquel vous pensez est ";
+               cout << "l'agaric jaunissant";
+          }
+          else if ( foret == 1)
+          {
+               cout << "Est-ce que votre champignon a un anneau (1 : oui, 0 : non) ? ";
+               cin >> anneau ;
+
+               if(anneau == 1)
+               {
+                    cout << "==> Le champignon auquel vous pensez est ";
+                    cout << "l'amanite tue-mouches";
+               }
+               else
+               { 
+                    cout << "==> Le champignon auquel vous pensez est ";  
+                    cout << "le pied bleu";
+               }
+          }
+     }
+
+}
