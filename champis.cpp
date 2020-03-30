@@ -16,7 +16,7 @@ int main()
      
      if(chapeau == 0)
      {
-          cout << "Est-ce que votre champignon vit en forÃªt (1 : oui, 0 : non) ? ";
+          cout << "Est-ce que votre champignon vit en forêt (1 : oui, 0 : non) ? ";
           cin >> foret ;
 
           if(foret == 0)
@@ -44,7 +44,7 @@ int main()
 
      if(chapeau == 1)
      {
-          cout << "Est-ce que votre champignon vit en forÃªt (1 : oui, 0 : non) ? ";
+          cout << "Est-ce que votre champignon vit en forêt (1 : oui, 0 : non) ? ";
           cin >> foret ;
 
           if(foret == 0)
