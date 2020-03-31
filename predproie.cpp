@@ -23,6 +23,11 @@ int main()
 
   // ===== PARTIE 1 =====
   // Saisie des populations initiales
+  do
+  {
+    cout << "Combien de lapins au départ  (>= 5) ? ";
+    cin >> lapins_i;
+  } while (lapins_i < 5);
 
   do
   {
@@ -30,11 +35,6 @@ int main()
     cin >> renards_i;
   } while (renards_i < 2);
 
-  do
-  {
-    cout << "Combien de lapins au départ  (>= 5) ? ";
-    cin >> lapins_i;
-  } while (lapins_i < 5);
 
   // ===== PARTIE 2 =====
   // Première simulation
