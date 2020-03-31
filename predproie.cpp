@@ -35,6 +35,8 @@ int main()
     cout << "Combien de lapins au départ  (>= 5) ? ";
     cin >> lapins_i;
   } while (lapins_i < 5);
+  
+  /*
 
   // ===== PARTIE 2 =====
   // Première simulation
@@ -185,6 +187,7 @@ int main()
       cout << "Les lapins et les renards ont des populations stables." << endl;
     }
   }
+  */
 
   /*******************************************
    * Ne rien modifier après cette ligne.
