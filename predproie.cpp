@@ -26,13 +26,13 @@ int main()
 
   do
   {
-    cout << "Combien de renards au départ (>= 2) ? ";
+    cout << "Combien de renards au départ (>= 2) ? "<<endl;
     cin >> renards_i;
   } while (renards_i < 2);
 
   do
   {
-  cout << "Combien de lapins au départ  (>= 5) ? ";
+  cout << "Combien de lapins au départ  (>= 5) ? "<<endl;
     cin >> lapins_i;
   } while (lapins_i < 5);
   
