@@ -32,7 +32,7 @@ int main()
 
   do
   {
-    cout << "Combien de lapins au départ  (>= 5) ? ";
+    cout << "Combien de lapins au départ (>= 5) ? ";
     cin >> lapins_i;
   } while (lapins_i < 5);
   
