@@ -20,10 +20,9 @@ int main()
   /*******************************************
    * Completez le programme a partir d'ici.
    *******************************************/
-  int count(0);
   for (int i = debut; i <= fin; ++i)
   {
-    count = 0;
+    int count = 0;
     int j = i ; 
     while (j > 0)
     {
