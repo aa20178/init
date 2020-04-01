@@ -24,10 +24,13 @@ int main()
   // ===== PARTIE 1 =====
   // Saisie des populations initiales
 
+bool bar(bool b = false);
+bool b(bar(bar(true)));
   do
   {
     cout << "Combien de renards au départ (>= 2) ? ";
     cin >> renards_i;
+    
   } while (renards_i < 2);
 
   do
