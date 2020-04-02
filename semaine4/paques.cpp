@@ -19,6 +19,7 @@ void affiche_date(int annee, int nombre_de_jours)
 
 int date_Paques(int annee)
 {
+  return 0 ;
 }
 
 int main()
