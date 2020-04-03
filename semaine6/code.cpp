@@ -1,26 +1,25 @@
 #include <iostream>
 using namespace std;
 
-int shift(char c, char start, int offset)
+int decale(char c, char debut, int decalage)
 {
-    while (offset < 0)
+    while (decalage < 0)
     {
-        offset = offset + 26;
+        decalage = decalage + 26;
     }
-    return start + (((c - start) + offset) % 26); 
-    //cout << c << "devient" << shifted <<endl; 
+    return debut + (((c - debut) + decalage) % 26); 
 }
 
 char code(char c, int d)
 {
     if ((c >= 'a') and (c <= 'z'))
     {
-        return shift(c, 'a', d);
+        return decale(c, 'a', d);
     }
 
     else if ((c >= 'A') and (c <= 'Z'))
     {
-        return shift(c, 'A', d);
+        return decale(c, 'A', d);
     }
 
     else
