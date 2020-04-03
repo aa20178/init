@@ -1,53 +1,51 @@
 #include <iostream>
 using namespace std;
 
+int shift(char c, char start, int offset)
+{
+    while (offset < 0)
+    {
+        offset += 26;
+    }
+    return start + (((c - start) + offset) % 26);
+}
+
 char code(char c, int d)
 {
-    if ( (c > 'a') and  (c <= 'z'))
+    if ((c > 'a') and (c <= 'z'))
     {
-        return decale(c,'a', d );
+        return shift(c, 'a', d);
     }
 
-    else if ((c > 'A') and  (c <= 'Z'))
+    else if ((c > 'A') and (c <= 'Z'))
     {
-        return decale(c,'A', d );
-
+        return shift(c, 'A', d);
     }
 
     else
     {
-        return c ; 
+        return c;
     }
-    
-}
-
-int decale(char c, char debut, int decalage) // 
-{
-    while (decalage < 0)
-    {
-        decalage += 26;
-    }
-    return debut + (((c - debut) + decalage) % 26) ; 
 }
 
 string code(string c, int d)
-{ 
-    string resultat("");
-    for(int i = 0 ; i < c.length(); ++i)
+{
+    string result("");
+    for (int i = 0; i < c.length(); ++i)
     {
-        resultat.insert(i,code(c, d));
+        char charcode = code(c[i], d);
+        result += charcode;
     }
-    return resultat ;
+    return result;
 }
 
-/*
 int main()
 {
     string s("Fuyez manants");
-    cout << s <<endl ; 
-    string nouv(s,4);
-    cout << nouv <<endl ; 
+    //cout << s <<endl ;
+    string nouv("");
+    nouv = code(s, 4);
+    cout << nouv << endl;
 
-    return  0 ; 
+    return 0;
 }
-*/
