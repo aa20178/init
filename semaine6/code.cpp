@@ -21,7 +21,7 @@ char code(char c, int d)
     
 }
 
-int decale(char c, char debut, int decalage)
+int decale(char c, char debut, int decalage) // 
 {
     while (decalage < 0)
     {
@@ -31,10 +31,23 @@ int decale(char c, char debut, int decalage)
 }
 
 string code(string c, int d)
-{ }
+{ 
+    string resultat("");
+    for(int i = 0 ; i < c.length(); ++i)
+    {
+        resultat.insert(i,code(c, d));
+    }
+    return resultat ;
+}
 
-
+/*
 int main()
 {
+    string s("Fuyez manants");
+    cout << s <<endl ; 
+    string nouv(s,4);
+    cout << nouv <<endl ; 
+
     return  0 ; 
 }
+*/
