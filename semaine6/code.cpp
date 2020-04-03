@@ -5,19 +5,20 @@ int shift(char c, char start, int offset)
 {
     while (offset < 0)
     {
-        offset += 26;
+        offset = offset + 26;
     }
-    return start + (((c - start) + offset) % 26);
+    return start + (((c - start) + offset) % 26); 
+    //cout << c << "devient" << shifted <<endl; 
 }
 
 char code(char c, int d)
 {
-    if ((c > 'a') and (c <= 'z'))
+    if ((c >= 'a') and (c <= 'z'))
     {
         return shift(c, 'a', d);
     }
 
-    else if ((c > 'A') and (c <= 'Z'))
+    else if ((c >= 'A') and (c <= 'Z'))
     {
         return shift(c, 'A', d);
     }
@@ -39,13 +40,20 @@ string code(string c, int d)
     return result;
 }
 
+string decode(string c, int d)
+{ 
+    return code(c, -d);
+}
+
 int main()
 {
     string s("Fuyez manants");
     //cout << s <<endl ;
-    string nouv("");
-    nouv = code(s, 4);
-    cout << nouv << endl;
+    string nouv(code(s, 4));
+    string decoded(decode(nouv, 4));
+
+    cout <<s << " se code en :" << nouv << endl;
+    cout <<nouv << " se decode en :" << decoded << endl;
 
     return 0;
 }
