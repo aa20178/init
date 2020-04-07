@@ -17,30 +17,29 @@ private:
 
 public:
   Souris() : poids(0), couleur(""), age(0), esperance_vie(36) { cout << "Une nouvelle souris !" << endl; }
-  Souris(double p, string c, unsigned int a = 0, unsigned int esperance = 36) : poids(p), couleur(c), age(a), esperance_vie(esperance) { cout << "Une nouvelle souris !" << endl; }
-  Souris(Souris& autre) : poids(autre.poids), couleur(autre.couleur), age(autre.age), esperance_vie(autre.esperance_vie*0.80) { cout << "Clonage d’une souris !" << endl; }
-  ~Souris(){ cout << "Fin d’une souris..." << endl; }
+  Souris(double p, string  c, unsigned int a = 0, unsigned int esperance = 36) : poids(p), couleur(c), age(a), esperance_vie(esperance) { cout << "Une nouvelle souris !" << endl; }
+  Souris(Souris &autre) : poids(autre.poids), couleur(autre.couleur), age(autre.age), esperance_vie(autre.esperance_vie * 0.80) { cout << "Clonage d’une souris !" << endl; }
+  ~Souris() { cout << "Fin d’une souris..." << endl; }
   void afficher()
   {
-    string s = "Une souris " +couleur;
+    string s;
     if (clonee == true)
     {
-      s += ", clonee,"; 
+      cout << "Une souris "<< couleur << ", clonee," << " de " << age << " mois et pesant " << poids << " grammes";
     }
-    s+=" de ";
-    s+=age;
-    s+= " mois et pesant";
-    s+= poids;
-    s+="grammes";
+    else
+    {
+      cout << "Une souris "<< couleur  <<  " de " << age << " mois et pesant " << poids << " grammes";
+    }
 
-    cout <<s<< endl ;
+    cout << s << endl;
   }
   void vieillir()
   {
     ++age;
-    if(clonee && age> esperance_vie/2)
+    if (clonee && age > esperance_vie / 2)
     {
-      couleur = "verte" ;
+      couleur = "verte";
     }
   }
 
@@ -50,11 +49,7 @@ public:
     {
       vieillir();
     }
-
   }
-
-
-
 
   /*******************************************
    * Ne rien modifier après cette ligne.
