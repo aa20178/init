@@ -8,6 +8,54 @@ class Souris
     Compléter le code à partir d'ici
   *******************************************************/
 
+private:
+  double poids;
+  string couleur;
+  unsigned int age;
+  unsigned int esperance_vie;
+  bool clonee;
+
+public:
+  Souris() : poids(0), couleur(""), age(0), esperance_vie(36) { cout << "Une nouvelle souris !" << endl; }
+  Souris(double p, string c, unsigned int a = 0, unsigned int esperance = 36) : poids(p), couleur(c), age(a), esperance_vie(esperance) { cout << "Une nouvelle souris !" << endl; }
+  Souris(Souris& autre) : poids(autre.poids), couleur(autre.couleur), age(autre.age), esperance_vie(autre.esperance_vie*0.80) { cout << "Clonage d’une souris !" << endl; }
+  ~Souris(){ cout << "Fin d’une souris..." << endl; }
+  void afficher()
+  {
+    string s = "Une souris " +couleur;
+    if (clonee == true)
+    {
+      s += ", clonee,"; 
+    }
+    s+=" de ";
+    s+=age;
+    s+= " mois et pesant";
+    s+= poids;
+    s+="grammes";
+
+    cout <<s<< endl ;
+  }
+  void vieillir()
+  {
+    ++age;
+    if(clonee && age> esperance_vie/2)
+    {
+      couleur = "verte" ;
+    }
+  }
+
+  void evolue()
+  {
+    while (age < esperance_vie)
+    {
+      vieillir();
+    }
+
+  }
+
+
+
+
   /*******************************************
    * Ne rien modifier après cette ligne.
    *******************************************/
