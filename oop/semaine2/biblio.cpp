@@ -46,7 +46,7 @@ public:
      {
           return titre;
      }
-     Auteur & getAuteur() const
+     Auteur &getAuteur() const
      {
           return getAuteur();
      }
@@ -74,14 +74,13 @@ public:
           cout << "L'oeuvre " << getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << " n'est plus disponible." << endl;
      }
 
-     Exemplaire(Oeuvre &o) : oeuvre(o) {cout << "Nouvel exemplaire de : " <<getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << endl;}
-     Exemplaire(Exemplaire &o) : oeuvre(o.getOeuvre()) {cout << "Copie d’un exemplaire : " <<getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << endl;}
-     ~Exemplaire(){cout << "Un exemplaire de : " <<getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() <<"a été jeté"<< endl;}
-
+     Exemplaire(Oeuvre &o) : oeuvre(o) { cout << "Nouvel exemplaire de : " << getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << endl; }
+     Exemplaire(Exemplaire &o) : oeuvre(o.getOeuvre()) { cout << "Copie d’un exemplaire : " << getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << endl; }
+     ~Exemplaire() { cout << "Un exemplaire de : " << getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << "a été jeté" << endl; }
 
      void affiche()
      {
-          cout << oeuvre.getTitre() << ", " << oeuvre.getAuteur().getNom() << ", en " << oeuvre.getLangue() ;
+          cout << oeuvre.getTitre() << ", " << oeuvre.getAuteur().getNom() << ", en " << oeuvre.getLangue();
      }
 
      Oeuvre const &getOeuvre()
@@ -93,8 +92,6 @@ private:
      Oeuvre &oeuvre;
 };
 
-
-
 class Bibliotheque
 {
 public:
@@ -103,18 +100,21 @@ public:
           cout << "La bibliothèque " << getNom() << " ferme ses portes et détruit ses livres." << endl;
      }
 
-     Bibliotheque(string s) : nom(s) {cout << "La bibliothèque " << getNom()<< " est ouverte " << endl;}
-     
-
+     Bibliotheque(string s) : nom(s) { cout << "La bibliothèque " << getNom() << " est ouverte " << endl; }
 
      string getNom()
      {
           return nom;
      }
 
+     void stocker()
+     {
+          return;
+     }
+
 private:
      string nom;
-     vector<Exemplaire*> v;
+     vector<Exemplaire *> v;
 };
 // Chaines de caractères à utiliser pour les affichages:
 /*
