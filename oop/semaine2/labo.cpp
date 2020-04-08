@@ -18,7 +18,7 @@ private:
 public:
   //Souris() : poids(0), couleur(""), age(0), esperance_vie(36), clonee(false) { cout << "Une nouvelle souris !" << endl; }
   Souris(double p, string c, unsigned int a = 0, unsigned int esperance = 36) : poids(p), couleur(c), age(a), esperance_vie(esperance), clonee(false) { cout << "Une nouvelle souris !" << endl; }
-  Souris(Souris &autre) : poids(autre.poids), couleur(autre.couleur), age(autre.age), esperance_vie(autre.esperance_vie * 0.8), clonee(true) { cout << "Clonage d’une souris !" << endl; }
+  Souris(Souris &autre) : poids(autre.poids), couleur(autre.couleur), age(autre.age), esperance_vie(autre.esperance_vie * 0.8), clonee(true) { cout << "Clonage d'une souris !" << endl; }
   ~Souris() { cout << "Fin d’une souris..." << endl; }
   void afficher() const
   {
