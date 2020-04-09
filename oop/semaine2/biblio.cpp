@@ -74,25 +74,25 @@ public:
      {
           cout << "Copie d’un exemplaire : " << getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << endl;
      }
-
-    /* Exemplaire(Exemplaire &e) : oeuvre(e.oeuvre) {} 
+/*  
+      Exemplaire(Exemplaire &ee) : oeuvre(ee.oeuvre)
      {
-          cout << "Nouvel exemplaire : " << getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << endl;
-     }
-     */
+          cout << "Nouvel exemplaire : " ;//<< getOeuvre().getTitre() << ", " << getOeuvre().getAuteur().getNom() << ", en " << getOeuvre().getLangue() << endl;
+     }  
+      */
 
-     void affiche()
+     void affiche() const
      {
           cout << oeuvre.getTitre() << ", " << oeuvre.getAuteur().getNom() << ", en " << oeuvre.getLangue();
      }
 
-     const Oeuvre &getOeuvre()
+      Oeuvre &getOeuvre() const
      {
           return oeuvre;
      }
 
 private:
-     Oeuvre &oeuvre;
+      Oeuvre &oeuvre;
 };
 
 class Bibliotheque
@@ -152,7 +152,7 @@ public:
           }
           return count;
      }
-     void afficher_auteurs(bool b = false)
+     void afficher_auteurs(bool b = false) 
      {
 
           for (int i(0); i < v.size(); i++)
