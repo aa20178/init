@@ -103,7 +103,7 @@ public:
           cout << "La bibliothèque " << getNom() << " ferme ses portes et détruit ses livres." << endl;
      }
 
-     Bibliotheque(string s) : nom(s) { cout << "La bibliothèque " << getNom() << " est ouverte " << endl; }
+     Bibliotheque(string s) : nom(s) { cout << "La bibliothèque " << getNom() << " est ouverte !" << endl; }
 
      string getNom()
      {
