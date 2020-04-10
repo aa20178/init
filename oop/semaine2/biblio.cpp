@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <memory>
 using namespace std;
 
 /*******************************************
  * Completez le programme a partir d'ici.
  *******************************************/
+#include <memory>
 
 class Auteur
 {
