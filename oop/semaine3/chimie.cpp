@@ -53,7 +53,7 @@ Flacon operator+(const Flacon &f1, const Flacon &f2)
   double den = f1.getVolume() + f2.getVolume();
   double newph = -log10(num / den);
   return Flacon(f1.getNom() + " + " + f2.getNom(), f1.getVolume() + f2.getVolume(), newph);
-}
+};
 
 /*******************************************
  * Ne rien modifier après cette ligne.
