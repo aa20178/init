@@ -6,8 +6,6 @@ using namespace std;
 /*******************************************
  * Completez le programme a partir d'ici.
  *******************************************/
-#include <memory>
-
 class Auteur
 {
 public:
@@ -103,6 +101,13 @@ class Bibliotheque
 public:
      ~Bibliotheque()
      {
+          {
+               for (int i(0); i < v.size(); i++)
+               {
+                    delete v[i];
+               }
+          }
+
           cout << "La bibliothèque " << getNom() << " ferme ses portes, et détruit ses livres." << endl;
      }
 
@@ -117,7 +122,7 @@ public:
      {
           for (int i(0); i < nombre; i++)
           {
-               v.push_back(std::make_unique<Exemplaire>(o));
+               v.push_back(new Exemplaire(o));
           }
 
           return;
@@ -182,7 +187,7 @@ public:
 
 private:
      string nom;
-     vector<unique_ptr<Exemplaire>> v;
+     vector<Exemplaire *> v;
 };
 // Chaines de caractères à utiliser pour les affichages:
 /*
@@ -207,36 +212,36 @@ détruit
 
 int main()
 {
-  Auteur a1("Victor Hugo"),
+     Auteur a1("Victor Hugo"),
          a2("Alexandre Dumas"),
          a3("Raymond Queneau", true);
 
-  Oeuvre o1("Les Misérables"           , a1, "français" ),
-         o2("L'Homme qui rit"          , a1, "français" ),
-         o3("Le Comte de Monte-Cristo" , a2, "français" ),
-         o4("Zazie dans le métro"      , a3, "français" ),
-         o5("The Count of Monte-Cristo", a2, "anglais" );
+     Oeuvre o1("Les Misérables", a1, "français"),
+         o2("L'Homme qui rit", a1, "français"),
+         o3("Le Comte de Monte-Cristo", a2, "français"),
+         o4("Zazie dans le métro", a3, "français"),
+         o5("The Count of Monte-Cristo", a2, "anglais");
 
-  Bibliotheque biblio("municipale");
-  biblio.stocker(o1, 2);
-  biblio.stocker(o2);
-  biblio.stocker(o3, 3);
-  biblio.stocker(o4);
-  biblio.stocker(o5);
+     Bibliotheque biblio("municipale");
+     biblio.stocker(o1, 2);
+     biblio.stocker(o2);
+     biblio.stocker(o3, 3);
+     biblio.stocker(o4);
+     biblio.stocker(o5);
 
-  cout << "La bibliothèque " << biblio.getNom()
-       << " offre les exemplaires suivants :" << endl;
-  biblio.lister_exemplaires();
+     cout << "La bibliothèque " << biblio.getNom()
+          << " offre les exemplaires suivants :" << endl;
+     biblio.lister_exemplaires();
 
-  const string langue("anglais");
-  cout << " Les exemplaires en "<< langue << " sont :" << endl;
-  biblio.lister_exemplaires(langue);
+     const string langue("anglais");
+     cout << " Les exemplaires en " << langue << " sont :" << endl;
+     biblio.lister_exemplaires(langue);
 
-  cout << " Les auteurs à succès sont :" << endl;
-  biblio.afficher_auteurs(true);
+     cout << " Les auteurs à succès sont :" << endl;
+     biblio.afficher_auteurs(true);
 
-  cout << " Il y a " << biblio.compter_exemplaires(o3) << " exemplaires de "
-       << o3.getTitre() << endl;
+     cout << " Il y a " << biblio.compter_exemplaires(o3) << " exemplaires de "
+          << o3.getTitre() << endl;
 
-  return 0;
+     return 0;
 }
