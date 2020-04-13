@@ -10,7 +10,7 @@ private:
   /*****************************************************
    * Compléter le code à partir d'ici
    *****************************************************/
-  string nom;
+string nom;
   unsigned int annee;
   string pays;
   double valeur_faciale;
@@ -143,14 +143,14 @@ int main()
   /* Ordre des arguments :
   *  nom, année d'émission, pays, valeur faciale, nombre d'exemplaires
   */
-  Rare t1("Guarana-4574", 1960, "Mexique", 0.2, 98);
-  Rare t2("Yoddle-201", 1916, "Suisse", 0.8, 3);
+  Rare t1( "Guarana-4574", 1960, "Mexique", 0.2, 98 );
+  Rare t2( "Yoddle-201"  , 1916, "Suisse" , 0.8,  3 );
 
   /* Ordre des arguments :
   *  nom, année d'émission, pays, valeur faciale, nombre d'exemplaires
   */
-  Commemoratif t3("700eme-501", 2002, "Suisse", 1.5);
-  Timbre t4("Setchuan-302", 2004, "Chine", 0.2);
+  Commemoratif t3( "700eme-501"  , 2002, "Suisse", 1.5 );
+  Timbre       t4( "Setchuan-302", 2004, "Chine" , 0.2 );
 
   /* Nous n'avons pas encore le polymorphisme :-(
    * (=> pas moyen de faire sans copie ici :-( )  */
