@@ -52,6 +52,22 @@ public:
     s+=" francs";
     return s;
   }
+
+  
+  ostream & afficher( ostream & s ) 
+  {
+    string so = "de nom " + getNom() + " datant de " + std::to_string(getAnnee()) + " (provenance " + getPays() + ") ayant pour valeur faciale " ;
+
+    std::string num_text = std::to_string(getValeurFaciale());
+    std::string rounded = num_text.substr(0, num_text.find(".")+2);
+
+    so += rounded ;
+    so +=" francs";
+    s << so ;
+    return s ;  
+
+  }
+
   double vente() //est sa valeur faciale, si le timbre a moins que cinq ans ; sinon,il  vaut  la  valeur  faciale  multipliée  par  2.5  fois  l’âge  du  timbre
   {
     if (age() < 5)
