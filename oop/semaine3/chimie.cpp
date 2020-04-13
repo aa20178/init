@@ -48,7 +48,7 @@ public:
     double num = num1 + num2;
     double den = f1.getVolume() + getVolume();
     double newph = -log10(num / den);
-    Flacon ff(f1.getNom() + " + " + getNom(), f1.getVolume() + getVolume(), newph);
+    Flacon ff(getNom() + " + " + f1.getNom(), f1.getVolume() + getVolume(), newph);
     return ff;
   } 
 };
