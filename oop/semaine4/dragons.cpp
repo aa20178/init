@@ -161,8 +161,8 @@ void combat(Dragon &d, Hydre &h)
  *******************************************/
 int main()
 {
-  Dragon dragon("Dragon rouge", 2, 10, 3, 20);
-  Hydre hydre("Hydre maléfique", 2, 10, 1, 10, 1, 42);
+  Dragon dragon("Dragon rouge"   , 2, 10, 3, 20         );
+  Hydre  hydre ("Hydre maléfique", 2, 10, 1, 10, 1,  42 );
 
   dragon.afficher();
   cout << "se prépare au combat avec :" << endl;
