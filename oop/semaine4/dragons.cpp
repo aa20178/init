@@ -23,7 +23,6 @@ public:
     return position_;
   }
 
-
   bool vivant() const
   {
     return (points_de_vie_ > 0);
@@ -47,7 +46,7 @@ public:
 
   void adieux() const
   {
-      cout << nom_ << " n'est plus !" << std::endl;
+    cout << nom_ << " n'est plus !" << std::endl;
   }
 
   void faiblir(int f)
@@ -110,7 +109,7 @@ public:
     {
       if (!bete.vivant())
       {
-        niveau_= niveau_ + 1;
+        niveau_ = niveau_ + 1;
       }
     }
   }
@@ -138,9 +137,8 @@ public:
     }
     if (vivant())
     {
-    
-        niveau_++;
-      
+
+      niveau_ = niveau_ + 1;
     }
   }
 
@@ -148,7 +146,6 @@ private:
   int longueur_cou_;
   int dose_poison_;
 };
-
 
 void combat(Dragon &d, Hydre &h)
 {
@@ -161,8 +158,8 @@ void combat(Dragon &d, Hydre &h)
  *******************************************/
 int main()
 {
-  Dragon dragon("Dragon rouge"   , 2, 10, 3, 20         );
-  Hydre  hydre ("Hydre maléfique", 2, 10, 1, 10, 1,  42 );
+  Dragon dragon("Dragon rouge", 2, 10, 3, 20);
+  Hydre hydre("Hydre maléfique", 2, 10, 1, 10, 1, 42);
 
   dragon.afficher();
   cout << "se prépare au combat avec :" << endl;
