@@ -126,8 +126,7 @@ class Hydre : public Creature
 {
 
 public:
-  Hydre(string nom, int niveau, int points_de_vie, int force, int longueur_cou, int dose_poison, int position = 0) : 
-  Creature(nom, niveau, points_de_vie, force, position), longueur_cou_(longueur_cou), dose_poison_(dose_poison) {position_= position;}
+  Hydre(string nom, int niveau, int points_de_vie, int force, int longueur_cou, int dose_poison, int position = 0) : Creature(nom, niveau, points_de_vie, force, position), longueur_cou_(longueur_cou), dose_poison_(dose_poison) { position_ = position; }
 
   bool est_a_portee(int pos_1, int pos_2, int loncou)
   {
