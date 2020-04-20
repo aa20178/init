@@ -76,7 +76,10 @@ public:
          << ", points d'attaque: " << points_attaque()
          << ", position: " << position() << std::endl;
   }
-
+  bool est_a_portee(int pos_1, int pos_2, int portee_flamme)
+  {
+    return (distance(pos_1, pos_2) <= portee_flamme);
+  }
 protected:
   string nom_;
   int niveau_;
@@ -99,10 +102,7 @@ public:
     }
   }
 
-  bool est_a_portee(int pos_1, int pos_2, int portee_flamme)
-  {
-    return (distance(pos_1, pos_2) <= portee_flamme);
-  }
+
 
   void souffle_sur(Creature &bete)
   {
@@ -110,7 +110,7 @@ public:
     {
       bete.faiblir(points_attaque());
       faiblir(distance(position_, bete.position()));
-      if (vivant() && !bete.vivant())
+      if (vivant() && (!bete.vivant()))
       {
         niveau_ = niveau_ + 1;
       }
@@ -127,17 +127,13 @@ class Hydre : public Creature
 public:
   Hydre(string nom, int niveau, int points_de_vie, int force, int longueur_cou, int dose_poison, int position = 0) : Creature(nom, niveau, points_de_vie, force, position), longueur_cou_(longueur_cou), dose_poison_(dose_poison) { position_ = position; }
 
-  bool est_a_portee(int pos_1, int pos_2, int loncou)
-  {
-    return (distance(pos_1, pos_2) <= loncou);
-  }
 
   void empoisonne(Creature &bete)
   {
     if (vivant() && bete.vivant() && est_a_portee(position_, bete.position(), longueur_cou_))
     {
       bete.faiblir(dose_poison_ + points_attaque());
-      if (vivant())
+      if (vivant()&&(!bete.vivant()))
       {
         niveau_ = niveau_ + 1;
       }
