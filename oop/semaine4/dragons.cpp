@@ -41,7 +41,10 @@ public:
   }
   void deplacer(int d)
   {
-    position_ = position_ + d;
+    if (vivant())
+    {
+      position_ = position_ + d;
+    }
   }
 
   void adieux() const
