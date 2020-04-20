@@ -10,7 +10,7 @@ private:
   /*****************************************************
    * Compléter le code à partir d'ici
    *****************************************************/
-string nom;
+  string nom;
   unsigned int annee;
   string pays;
   double valeur_faciale;
@@ -39,34 +39,31 @@ public:
   unsigned int age() const
   {
     return ANNEE_COURANTE - getAnnee();
-  } 
+  }
 
   string afficher() const
   {
-    string s = "de nom " + getNom() + " datant de " + std::to_string(getAnnee()) + " (provenance " + getPays() + ") ayant pour valeur faciale " ;
+    string s = "de nom " + getNom() + " datant de " + std::to_string(getAnnee()) + " (provenance " + getPays() + ") ayant pour valeur faciale ";
 
-    std::string num_text = std::to_string(getValeurFaciale());
-    std::string rounded = num_text.substr(0, num_text.find(".")+2);
+    /*     std::string num_text = std::to_string(getValeurFaciale());
+    std::string rounded = num_text.substr(0, num_text.find(".")+2); */
 
-    s += rounded ;
-    s+=" francs";
+    s += std::to_string(getValeurFaciale()/1.0);
+    s += " francs";
     return s;
   }
 
-  
-  ostream & afficher( ostream & s ) 
+  /*  ostream &afficher(ostream &s)
   {
-    string so = "de nom " + getNom() + " datant de " + std::to_string(getAnnee()) + " (provenance " + getPays() + ") ayant pour valeur faciale " ;
+    string so = "de nom " + getNom() + " datant de " + std::to_string(getAnnee()) + " (provenance " + getPays() + ") ayant pour valeur faciale ";
 
-    std::string num_text = std::to_string(getValeurFaciale());
-    std::string rounded = num_text.substr(0, num_text.find(".")+2);
-
-    so += rounded ;
-    so +=" francs";
-    s << so ;
-    return s ;  
-
-  }
+         std::string num_text = std::to_string(getValeurFaciale());
+    std::string rounded = num_text.substr(0, num_text.find(".")+2); 
+    s << std::to_string(getValeurFaciale());
+    s<< " francs";
+    
+    return s;
+  } */
 
   double vente() //est sa valeur faciale, si le timbre a moins que cinq ans ; sinon,il  vaut  la  valeur  faciale  multipliée  par  2.5  fois  l’âge  du  timbre
   {
@@ -85,7 +82,6 @@ std::ostream &operator<<(std::ostream &os, const Timbre &obj)
   os << "Timbre " + obj.afficher();
   return os;
 }
-
 
 class Rare : public Timbre
 {
@@ -120,7 +116,6 @@ public:
     return base() * (age() / 10.0);
   }
 
-
 private:
   static constexpr unsigned int PRIX_BASE_TRES_RARE = 600;
 
@@ -146,12 +141,12 @@ private:
 
 std::ostream &operator<<(std::ostream &os, const Rare &obj)
 {
-  os << "Timbre rare (" <<obj.nb_exemplaires() <<" ex.) " <<obj.afficher();
+  os << "Timbre rare (" << obj.nb_exemplaires() << " ex.) " << obj.afficher();
   return os;
 }
 std::ostream &operator<<(std::ostream &os, const Commemoratif &obj)
 {
-  os << "Timbre commémoratif " <<obj.afficher();
+  os << "Timbre commémoratif " << obj.afficher();
   return os;
 }
 /*******************************************
@@ -162,14 +157,14 @@ int main()
   /* Ordre des arguments :
   *  nom, année d'émission, pays, valeur faciale, nombre d'exemplaires
   */
-  Rare t1( "Guarana-4574", 1960, "Mexique", 0.2, 98 );
-  Rare t2( "Yoddle-201"  , 1916, "Suisse" , 0.8,  3 );
+  Rare t1("Guarana-4574", 1960, "Mexique", 0.2, 98);
+  Rare t2("Yoddle-201", 1916, "Suisse", 0.8, 3);
 
   /* Ordre des arguments :
   *  nom, année d'émission, pays, valeur faciale, nombre d'exemplaires
   */
-  Commemoratif t3( "700eme-501"  , 2002, "Suisse", 1.5 );
-  Timbre       t4( "Setchuan-302", 2004, "Chine" , 0.2 );
+  Commemoratif t3("700eme-501", 2002, "Suisse", 1.5);
+  Timbre t4("Setchuan-302", 2004, "Chine", 0.2);
 
   /* Nous n'avons pas encore le polymorphisme :-(
    * (=> pas moyen de faire sans copie ici :-( )  */

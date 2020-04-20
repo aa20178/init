@@ -13,23 +13,160 @@ class Creature
   /*****************************************************
    * Compléter le code à partir d'ici
    *****************************************************/
+protected:
+  string nom_;
+  int niveau_;
+  int points_de_vie_;
+  int force_;
+  int position_;
 
-         << ", niveau: "
-         << ", points de vie: "
-         << ", force: "
-         << ", points d'attaque: "
-         << ", position: "
+public:
+  Creature(string nom, int niveau, int points_de_vie, int force, int position = 0) : nom_(nom), niveau_(niveau),
+                                                                                     points_de_vie_(points_de_vie), force_(force), position_(position) {}
 
-         << " n'est plus !"
+  int getPosition()
+  {
+    return position_;
+  }
+  int position()
+  {
+    return position_;
+  }
 
+  bool vivant()
+  {
+    return (points_de_vie_ > 0);
+  }
+
+  int points_attaque()
+  {
+
+    if (vivant())
+    {
+      return niveau_ * force_;
+    }
+
+    else
+      return 0;
+  }
+  void deplacer(int d)
+  {
+    position_ = position_ + d;
+  }
+
+  void adieux()
+  {
+    cout << nom_ << " n'est plus !";
+  }
+
+  void faiblir(int f)
+  {
+    if (vivant())
+    {
+      points_de_vie_ = points_de_vie_ - f;
+    }
+
+    if (points_de_vie_ <= 0)
+    {
+      points_de_vie_ = 0;
+      adieux();
+    }
+  }
+
+  void afficher()
+  {
+
+    cout << nom_
+         << ", niveau: " << niveau_
+         << ", points de vie: " << points_de_vie_
+         << ", force: " << force_
+         << ", points d'attaque: " << points_attaque()
+         << ", position: " << position_ << std::endl;
+  }
 };
+
+class Dragon : public Creature
+{
+private:
+  int portee_flamme_;
+
+public:
+  Dragon(string nom, int niveau, int points_de_vie, int force, int portee_flamme, int position = 0) :
+   Creature(nom, niveau, points_de_vie, force, position), portee_flamme_(portee_flamme) {}
+
+  void voler(int pos)
+  {
+    deplacer(pos);
+  }
+
+  bool est_a_portee(int pos_1, int pos_2, int portee_flamme)
+  {
+    return (distance(pos_1, pos_2) <= portee_flamme_);
+  }
+
+  void souffle_sur(Creature &bete)
+  {
+    if (vivant() && bete.vivant() && est_a_portee(position_, bete.getPosition(), portee_flamme_))
+    {
+      bete.faiblir(points_attaque());
+      faiblir(distance(position_, bete.getPosition()));
+    }
+    if (vivant())
+    {
+      if (!bete.vivant())
+      {
+        niveau_++;
+      }
+    }
+  }
+};
+
+class Hydre : public Creature
+{
+private:
+  int longueur_cou_;
+  int dose_poison_;
+
+public:
+  // Creature(string nom, int niveau, int points_de_vie, int force, int position = 0) : nom_(nom), niveau_(niveau),
+  //points_de_vie_(points_de_vie), force_(force), position_(position) {}
+
+  Hydre(string nom, int niveau, int points_de_vie, int force, int longueur_cou, int dose_poison_, int portee, int position = 0) :
+   Creature(nom, niveau, points_de_vie, force, position), longueur_cou_(longueur_cou), dose_poison_(dose_poison_) {}
+
+  bool est_a_portee(int pos_1, int pos_2, int loncou)
+  {
+    return (distance(pos_1, pos_2) <= loncou);
+  }
+
+  void empoisonne(Creature &bete)
+  {
+    if (vivant() && bete.vivant() && est_a_portee(position_, bete.getPosition(), longueur_cou_))
+    {
+      bete.faiblir(dose_poison_ + points_attaque());
+    }
+    if (vivant())
+    {
+      if (!bete.vivant())
+      {
+        niveau_++;
+      }
+    }
+  }
+};
+void combat(Dragon &d, Hydre &h)
+{
+  h.empoisonne(d);
+  d.souffle_sur(h);
+}
+
 /*******************************************
  * Ne rien modifier après cette ligne.
  *******************************************/
 int main()
 {
-  Dragon dragon("Dragon rouge"   , 2, 10, 3, 20         );
-  Hydre  hydre ("Hydre maléfique", 2, 10, 1, 10, 1,  42 );
+  Dragon dragon("Dragon rouge", 2, 10, 3, 20);
+  Hydre hydre("Hydre maléfique", 2, 10, 1, 10, 1, 42);
 
   dragon.afficher();
   cout << "se prépare au combat avec :" << endl;
