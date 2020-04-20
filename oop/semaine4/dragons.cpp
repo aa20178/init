@@ -110,7 +110,7 @@ public:
     {
       if (!bete.vivant())
       {
-        niveau_++;
+        niveau_= niveau_ + 1;
       }
     }
   }
@@ -138,10 +138,9 @@ public:
     }
     if (vivant())
     {
-      if (!bete.vivant())
-      {
+    
         niveau_++;
-      }
+      
     }
   }
 
