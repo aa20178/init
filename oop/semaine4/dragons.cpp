@@ -93,7 +93,10 @@ public:
 
   void voler(int pos)
   {
-    deplacer(pos);
+    if (vivant())
+    {
+      deplacer(pos);
+    }
   }
 
   bool est_a_portee(int pos_1, int pos_2, int portee_flamme)
@@ -107,10 +110,7 @@ public:
     {
       bete.faiblir(points_attaque());
       faiblir(distance(position_, bete.position()));
-    }
-    if (vivant())
-    {
-      if (!bete.vivant())
+      if (vivant() && !bete.vivant())
       {
         niveau_ = niveau_ + 1;
       }
@@ -137,11 +137,10 @@ public:
     if (vivant() && bete.vivant() && est_a_portee(position_, bete.position(), longueur_cou_))
     {
       bete.faiblir(dose_poison_ + points_attaque());
-    }
-    if (vivant())
-    {
-
-      niveau_ = niveau_ + 1;
+      if (vivant())
+      {
+        niveau_ = niveau_ + 1;
+      }
     }
   }
 
