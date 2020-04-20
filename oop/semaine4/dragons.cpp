@@ -99,7 +99,7 @@ public:
 
   bool est_a_portee(int pos_1, int pos_2, int portee_flamme)
   {
-    return (distance(pos_1, pos_2) <= portee_flamme_);
+    return (distance(pos_1, pos_2) <= portee_flamme);
   }
 
   void souffle_sur(Creature &bete)
@@ -152,6 +152,8 @@ private:
   int longueur_cou_;
   int dose_poison_;
 };
+
+
 void combat(Dragon &d, Hydre &h)
 {
   h.empoisonne(d);
