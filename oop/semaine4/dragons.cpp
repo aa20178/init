@@ -18,21 +18,18 @@ public:
   Creature(string nom, int niveau, int points_de_vie, int force, int position = 0) : nom_(nom), niveau_(niveau),
                                                                                      points_de_vie_(points_de_vie), force_(force), position_(position) {}
 
-  int getPosition()
-  {
-    return position_;
-  }
-  int position()
+  int position() const
   {
     return position_;
   }
 
-  bool vivant()
+
+  bool vivant() const
   {
     return (points_de_vie_ > 0);
   }
 
-  int points_attaque()
+  int points_attaque() const
   {
 
     if (vivant())
@@ -48,9 +45,9 @@ public:
     position_ = position_ + d;
   }
 
-  void adieux()
+  void adieux() const
   {
-    cout << nom_ << " n'est plus !";
+      cout << nom_ << " n'est plus !" << std::endl;
   }
 
   void faiblir(int f)
@@ -67,7 +64,7 @@ public:
     }
   }
 
-  void afficher()
+  void afficher() const
   {
 
     cout << nom_
@@ -104,10 +101,10 @@ public:
 
   void souffle_sur(Creature &bete)
   {
-    if (vivant() && bete.vivant() && est_a_portee(position_, bete.getPosition(), portee_flamme_))
+    if (vivant() && bete.vivant() && est_a_portee(position_, bete.position(), portee_flamme_))
     {
       bete.faiblir(points_attaque());
-      faiblir(distance(position_, bete.getPosition()));
+      faiblir(distance(position_, bete.position()));
     }
     if (vivant())
     {
@@ -135,7 +132,7 @@ public:
 
   void empoisonne(Creature &bete)
   {
-    if (vivant() && bete.vivant() && est_a_portee(position_, bete.getPosition(), longueur_cou_))
+    if (vivant() && bete.vivant() && est_a_portee(position_, bete.position(), longueur_cou_))
     {
       bete.faiblir(dose_poison_ + points_attaque());
     }
