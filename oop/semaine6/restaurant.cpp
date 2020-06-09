@@ -9,12 +9,17 @@ using namespace std;
  *****************************************************/
 class Produit
 {
+
+protected:
+  string nom_;
+  string unite_;
+
 public:
-  Produit(string nom, string unite = "") : nom_produit_(nom), unite_(unite) {}
+  Produit(string a, string b = "") : nom_(a), unite_(b) {}
 
   string getNom() const
   {
-    return nom_produit_;
+    return nom_;
   }
   string getUnite() const
   {
@@ -22,162 +27,180 @@ public:
   }
   virtual string toString() const
   {
-    return nom_produit_;
-  }
-  double quantiteTotale(const string &nomProduit) const
-  {
-    if (nom_produit_ == nomProduit)
-    {
-      return 1;
-    }
-    else
-      return 0;
+    return nom_;
   }
 
-  virtual const Produit *adapter()
+  const Produit *adapter(double d) const
   {
     return this;
   }
 
-protected:
-  string nom_produit_;
-  string unite_;
+  virtual double quantiteTotale(const string &nomProduit) const //produit
+  {
+    if (getNom() == nomProduit)
+    {
+      return 1;
+    }
+    else
+    {
+      return 0;
+    }
+  }
 };
 
 class Ingredient
 {
+private:
+  const Produit &produit_;
+  double quantite;
+
 public:
-  Ingredient(Produit const &inproduit, double quantite) : p_(inproduit), quantite_(quantite) {}
+  Ingredient(const Produit &p, double q) : produit_(p), quantite(q) {}
 
-  const Produit &getProduit() const
+  const Produit &getProduit() const //was virtual
   {
-    return p_;
-  }
-
-  void setQuantite(double q)
-  {
-    quantite_ = q;
+    return produit_;
   }
 
   double getQuantite() const
   {
-    return quantite_;
+    return quantite;
   }
+
   string descriptionAdaptee() const
   {
-    return std::to_string(quantite_) + " " + p_.getUnite() + " de " + p_.toString();
+    ostringstream ss;
+    ss << quantite; //Utiliser ss comme cout
+
+    string s = std::to_string(quantite) + " " + produit_.getUnite() + " de ";
+
+    const Produit *produitadap = produit_.adapter(quantite);
+
+    s = s + produitadap->toString();
+    return s;
   }
 
-  double quantiteTotale(const string &nomProduit)
+  double quantiteTotale(const string &nomProduit) const
   {
-
-    return getQuantite() * p_.quantiteTotale(nomProduit);
+    return (getQuantite() * getProduit().quantiteTotale(nomProduit));
   }
-
-private:
-  const Produit &p_;
-  double quantite_;
 };
 
 class Recette
 {
-public:
-  Recette(string nom, double nombre = 1) : nom_recette_(nom), nbFois_(nombre) {}
+private:
+  vector<Ingredient> liste;
+  string nom_recette_;
+  double nbFois_;
 
+public:
+  Recette(string nom, double q = 1) : nom_recette_(nom), nbFois_(q) {}
+
+  double getnbFois_() const
+  {
+    return nbFois_;
+  }
+  string getnom_recette_() const
+  {
+    return nom_recette_;
+  }
   void ajouter(const Produit &p, double quantite)
   {
-    Ingredient a(p, nbFois_ * quantite);
-
-    ingredients_.push_back(a);
+    Ingredient i(p, quantite * nbFois_);
+    liste.push_back(i);
   }
 
-  virtual Recette adapter(double n)
+  Recette adapter(double n)
   {
-    Recette r(nom_recette_, n / nbFois_);
-    /*  
-   for (auto &ing : ingredients_)
+    Recette r(nom_recette_, n * nbFois_);
+    for (size_t i(0); i < liste.size(); i++)
     {
-      ing.setQuantite(ing.getQuantite() * (n / nbFois_));
+      r.ajouter(liste[i].getProduit(), liste[i].getQuantite() * n / nbFois_); //enlever le n ? 
     }
-     */
+
     return r;
   }
 
-  virtual string toString()
+  string toString() const // was virtual
   {
     string s;
-    s = s + "Recette \"" + this->nom_recette_ + "\" x " + std::to_string(nbFois_) + ":" + "\n";
-    for (size_t i(0); i < ingredients_.size(); i++)
+
+    ostringstream ss;
+    ss << nbFois_; //Utiliser ss comme cout
+    string nbFois_str = ss.str();
+
+    s = s + "  Recette \"" + nom_recette_ + "\" x " + nbFois_str + ":" + "\n";
+
+    for (size_t i(0); i < liste.size(); i++)
     {
-      s = s + std::to_string(i + 1) + ". " + ingredients_[i].descriptionAdaptee();
-      if (i != (ingredients_.size() - 1))
+      s = s + "  " + std::to_string(i + 1) + ". " + liste[i].descriptionAdaptee(); // DOUTE ICI
+      if (i != (liste.size() - 1))
       {
         s = s + "\n";
       }
     }
+
     return s;
   }
 
-  virtual double quantiteTotale(const string &nomProduit) const
+  double quantiteTotale(const string &nomProduit) const  //recette
   {
     double somme(0);
-    for (size_t i(0); i < ingredients_.size(); i++)
+
+    for (size_t i(0); i < liste.size(); i++)
     {
-      if (ingredients_[i].getProduit().getNom() == nomProduit)
+      if (liste[i].getProduit().getNom() == nomProduit)
       {
-        somme = somme + ingredients_[i].getQuantite();
+        somme = somme + liste[i].getQuantite();
       }
     }
     return somme;
   }
-
-private:
-  vector<Ingredient> ingredients_;
-  string nom_recette_;
-  double nbFois_;
 };
 
 class ProduitCuisine : public Produit
 {
 public:
-  ProduitCuisine(string nom) : Produit(nom, "portions"), r(nom) {}
+  ProduitCuisine(string no) : Produit(no, "portion(s)"), recetteCuisine(no) {}
 
-  void ajouterARecette(const Produit &produit, double quantite)
+  void ajouterARecette(const Produit &prod, double quan)
   {
-    //cout << "toto";
-    r.ajouter(produit, quantite);
+    recetteCuisine.ajouter(prod, quan);
   }
 
-  const ProduitCuisine *adapter(double n)
+  //const ProduitCuisine *adapter(double n)  override
+  const Produit *adapter(double n) const
   {
-    ProduitCuisine *pp = new ProduitCuisine(nom_produit_);
-    pp->r.adapter(n);
+
+    ProduitCuisine *pp = new ProduitCuisine(getNom());
+    pp->recetteCuisine.adapter(n); //adapter(n);
     return pp;
   }
 
-  string toString()
+  string toString() const override
   {
     string s;
-    s = s + Produit::toString() + "\n"; // cause segfault
-
-    s = s + r.toString() + ":";
+    s += Produit::toString();
+    s += "\n";
+    s += recetteCuisine.toString();
+    //s += ":";
     return s;
   }
 
-  double quantiteTotale(const string &nomProduit)
+  double quantiteTotale(const string &nomProduit) //produit Cuisine
   {
-    if (nom_produit_ == nomProduit)
+    if (getNom() == nomProduit)
     {
       return 1;
     }
     else
     {
-      return r.quantiteTotale(nomProduit);
+      return recetteCuisine.quantiteTotale(nomProduit);
     }
   }
 
 private:
-  Recette r;
+  Recette recetteCuisine;
 };
 
 /*******************************************
