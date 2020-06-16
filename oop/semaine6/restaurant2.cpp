@@ -30,7 +30,7 @@ public:
     return nom_;
   }
 
-   const Produit *adapter(double d) const // virtual provoque un BUG ICI 
+  virtual const Produit *adapter(double d) const
   {
     return this;
   }
@@ -115,7 +115,7 @@ public:
     Recette r(nom_recette_, n * nbFois_);
     for (size_t i(0); i < liste.size(); i++)
     {
-      r.ajouter(liste[i].getProduit(), liste[i].getQuantite() * n / nbFois_); //enlever le n ? 
+      r.ajouter(liste[i].getProduit(), liste[i].getQuantite()  / nbFois_); //enlever le n ? 
     }
 
     return r;
@@ -168,8 +168,7 @@ public:
     recetteCuisine.ajouter(prod, quan);
   }
 
-  //const ProduitCuisine *adapter(double n)  override
-  const Produit *adapter(double n) const
+  const Produit *adapter(double n) const override
   {
 
     ProduitCuisine *pp = new ProduitCuisine(getNom());
@@ -187,7 +186,7 @@ public:
     return s;
   }
 
-  double quantiteTotale(const string &nomProduit) //produit Cuisine
+  double quantiteTotale(const string &nomProduit) const override //produit Cuisine
   {
     if (getNom() == nomProduit)
     {
@@ -202,7 +201,6 @@ public:
 private:
   Recette recetteCuisine;
 };
-
 
 /*******************************************
  * Ne rien modifier après cette ligne.
