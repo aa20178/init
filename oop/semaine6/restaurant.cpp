@@ -30,7 +30,7 @@ public:
     return nom_;
   }
 
-  const Produit *adapter(double d) const
+  virtual const Produit *adapter(double d) const
   {
     return this;
   }
@@ -110,12 +110,12 @@ public:
     liste.push_back(i);
   }
 
-  Recette adapter(double n)
+  Recette adapter(double n) const
   {
     Recette r(nom_recette_, n * nbFois_);
     for (size_t i(0); i < liste.size(); i++)
     {
-      r.ajouter(liste[i].getProduit(), liste[i].getQuantite() * n / nbFois_); //enlever le n ? 
+      r.ajouter(liste[i].getProduit(), liste[i].getQuantite() / nbFois_); //enlever le n ? 
     }
 
     return r;
@@ -151,7 +151,7 @@ public:
     {
       if (liste[i].getProduit().getNom() == nomProduit)
       {
-        somme = somme + liste[i].getQuantite();
+        somme = somme + liste[i].quantiteTotale(nomProduit);
       }
     }
     return somme;
@@ -168,15 +168,15 @@ public:
     recetteCuisine.ajouter(prod, quan);
   }
 
-  //const ProduitCuisine *adapter(double n)  override
-  const Produit *adapter(double n) const
+  
+  const ProduitCuisine *adapter(double n) const override
   {
-
-    ProduitCuisine *pp = new ProduitCuisine(getNom());
-    pp->recetteCuisine.adapter(n); //adapter(n);
-    return pp;
+ 
+		ProduitCuisine *pp = new ProduitCuisine(getNom());
+		pp->recetteCuisine = recetteCuisine.adapter(n); //commentaire de l'ide
+		return pp;
   }
-
+	
   string toString() const override
   {
     string s;
