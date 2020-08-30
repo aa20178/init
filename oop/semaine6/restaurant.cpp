@@ -35,7 +35,7 @@ public:
     return this;
   }
 
-  virtual double quantiteTotale(const string &nomProduit) const //produit
+  virtual double quantiteTotale(const string &nomProduit) const //où elle retournera1.si le produit a pour nomnomProduitet0.sinon ;
   {
     if (getNom() == nomProduit)
     {
@@ -48,7 +48,7 @@ public:
   }
 };
 
-class Ingredient
+class Ingredient 
 {
 private:
   const Produit &produit_;
@@ -96,6 +96,7 @@ private:
 public:
   Recette(string nom, double q = 1) : nom_recette_(nom), nbFois_(q) {}
 
+/*
   double getnbFois_() const
   {
     return nbFois_;
@@ -104,6 +105,7 @@ public:
   {
     return nom_recette_;
   }
+  */
   void ajouter(const Produit &p, double quantite)
   {
     Ingredient i(p, quantite * nbFois_);
@@ -149,10 +151,9 @@ public:
 
     for (size_t i(0); i < liste.size(); i++)
     {
-      if (liste[i].getProduit().getNom() == nomProduit)
-      {
+      
         somme = somme + liste[i].quantiteTotale(nomProduit);
-      }
+      
     }
     return somme;
   }
@@ -187,7 +188,12 @@ public:
     return s;
   }
 
-  double quantiteTotale(const string &nomProduit) //produit Cuisine
+  /*
+  où elle retournera1.si le produit a pour nom nomProduit, 
+  et sinon, la quantité totale de ce produit dans la re-cette du produit cuisiné,
+  cette méthode doit re-implémenter celle définiedansProduit;
+  */
+  double quantiteTotale(const string &nomProduit) const
   {
     if (getNom() == nomProduit)
     {
@@ -202,11 +208,10 @@ public:
 private:
   Recette recetteCuisine;
 };
-
 /*******************************************
  * Ne rien modifier après cette ligne.
  *******************************************/
-void afficherQuantiteTotale(const Recette &recette, const Produit &produit)
+void afficherQuantiteTotale(const Recette& recette, const Produit& produit)
 {
   string nom = produit.getNom();
   cout << "Cette recette contient " << recette.quantiteTotale(nom)
@@ -262,8 +267,7 @@ int main()
   afficherQuantiteTotale(doubleRecette, glacage);
   cout << endl;
 
-  cout << "===========================\n"
-       << endl;
+  cout << "===========================\n" << endl;
   cout << "Vérification que le glaçage n'a pas été modifié :\n";
   cout << glacage.toString() << endl;
 
