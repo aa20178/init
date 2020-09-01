@@ -104,6 +104,10 @@ public:
      ~Bibliotheque()
      {
           cout << "La bibliothèque " << getNom() << " ferme ses portes, et détruit ses livres." << endl;
+                    for (int i(0); i < nombre; i++)
+          {
+                         delete v[i];
+          }
      }
 
      Bibliotheque(string s) : nom(s) { cout << "La bibliothèque " << getNom() << " est ouverte !" << endl; }
@@ -117,7 +121,8 @@ public:
      {
           for (int i(0); i < nombre; i++)
           {
-               v.push_back(std::make_unique<Exemplaire>(o));
+               Exemplaire eee = new Exemplaire(o);
+               v.push_back(eee);
           }
 
           return;
@@ -182,7 +187,7 @@ public:
 
 private:
      string nom;
-     vector<unique_ptr<Exemplaire>> v;
+     vector<Exemplaire*> v;
 };
 // Chaines de caractères à utiliser pour les affichages:
 /*
