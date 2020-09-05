@@ -11,6 +11,13 @@ using namespace std;
 class Auteur
 {
 public:
+/*
+
+  Auteur a1("Victor Hugo"),
+         a2("Alexandre Dumas"),
+         a3("Raymond Queneau", true);
+
+*/
      Auteur(string n, bool p = false) : nom(n), prime(p) {}
      Auteur(const Auteur &a) = delete;
 
@@ -18,7 +25,7 @@ public:
      {
           return nom;
      }
-     bool getPrime() const
+     bool getPrix() const
      {
           if (prime)
           {
@@ -34,12 +41,16 @@ private:
 class Oeuvre
 {
 public:
+/*
+  Oeuvre o1("Les Misérables"           , a1, "français" ),
+  */
+  
      Oeuvre(const Oeuvre &o) = delete;
 
      Oeuvre(string tit, Auteur &a, string lan) : titre(tit), auteur(a), langue(lan) {}
      ~Oeuvre()
      {
-          cout << "L’oeuvre " << getTitre() << ", " << getAuteur().getNom() << ", en " << getLangue() << " n’est plus disponible." << endl;
+          cout << "L'oeuvre \"" << getTitre() << ", " << getAuteur().getNom() << ", en " << getLangue() << "\" n'est plus disponible." << endl;
      }
      string getTitre() const
      {
@@ -73,7 +84,7 @@ private:
 class Exemplaire
 {
 public:
-     ~Exemplaire() { cout << "Un exemplaire de " << getOeuvre().affiche_string() << " a été jeté !" << endl; }
+     ~Exemplaire() { cout << "Un exemplaire de \"" << getOeuvre().affiche_string() << "\" a été jeté !" << endl; }
      Exemplaire(Oeuvre &o) : oeuvre(o)
      {
           cout << "Nouvel exemplaire de : " << getOeuvre().affiche_string() << endl;
@@ -103,7 +114,7 @@ class Bibliotheque
 public:
      ~Bibliotheque()
      {
-          cout << "La bibliothèque " << getNom() << " ferme ses portes, et détruit ses livres." << endl;
+          cout << "La bibliothèque " << getNom() << " ferme ses portes,\net détruit ses exemplaires :" << endl;
                     for (int i(0); i < v.size(); i++)
           {
                          delete v[i];
@@ -170,7 +181,7 @@ public:
           {
                for (int i(0); i < v.size(); i++)
                {
-                    if (v[i]->getOeuvre().getAuteur().getPrime() == true)
+                    if (v[i]->getOeuvre().getAuteur().getPrix() == true)
                     {
                          cout << v[i]->getOeuvre().getAuteur().getNom() << endl;
                     }
