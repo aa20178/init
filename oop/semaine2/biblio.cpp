@@ -104,7 +104,7 @@ public:
      ~Bibliotheque()
      {
           cout << "La bibliothèque " << getNom() << " ferme ses portes, et détruit ses livres." << endl;
-                    for (int i(0); i < nombre; i++)
+                    for (int i(0); i < v.size(); i++)
           {
                          delete v[i];
           }
@@ -121,7 +121,7 @@ public:
      {
           for (int i(0); i < nombre; i++)
           {
-               Exemplaire eee = new Exemplaire(o);
+               Exemplaire* eee = new Exemplaire(o);
                v.push_back(eee);
           }
 
