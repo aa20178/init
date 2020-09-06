@@ -33,12 +33,99 @@ class Navire
    * Compléter le code à partir d'ici
    *****************************************************/
 
+public:
+
+Pavillon pavillon_;
+Etat etat_;
+Coordonnees position_;
+Navire(int x, int y, Pavillon pavillonIn) : position_(x,y), pavillon_(pavillonIn), etat_(Intact) {}
+
+ostream& afficher() const ;
+
+
+
+Coordonnees position() const
+{
+	return position_;
+	
+}
+
+void avancer(int de_x, int de_y) 
+{
+	if (etat_!=Coule)
+	{
+		Coordonnees c(de_x,de_y); 
+		position_ += c;
+	}
+}
+void renflouer() 
+{
+		etat_= Intact;
+}
+
+
+
+
 };
+
+
 
 void Coordonnees::operator+=(Coordonnees const& autre)
 {
-  // à définir ici
+	 x_ = x_ + autre.x() ;
+	 y_ = y_ + autre.y() ;
 
+}
+
+double distance(const Coordonnees& ship1,const Coordonnees& ship2) 
+{
+	double terme1 = (ship1.x() - ship2.x()) *(ship1.x() - ship2.x());
+		double terme2 = (ship1.y() - ship2.y()) *(ship1.y() - ship2.y());
+
+	return sqrt( terme1+terme2) ; 
+	
+}
+double distance(const Navire& n1, const Navire& n2) 
+{
+	return distance(n1.position_,n2.position_) ;
+}
+
+
+ ostream& operator<<(ostream& os, Pavillon const& autre)
+{
+	if(autre==JollyRogers) 
+		os << "pirate";
+	else if (autre==CompagnieDuSenegal)
+		os << "français";
+	else if (autre== CompagnieDOstende)
+		os << "autrichien";
+	else os << "pavillon inconnu";
+		
+	
+}
+ ostream& operator<<(ostream& os, Etat const& autre)
+{
+	if(autre==Intact) 
+		os << "intact";
+	else if (autre==Endommage)
+		os << "ayant subi des dommages";
+	else if (autre==Coule)
+		os << "coule";
+	else os << "état inconnu";
+		
+	
+}
+
+ ostream& operator<<(ostream& os, Coordonnees const& autre)
+{
+	os << "(" << autre.x() <<", " << autre.y() << ")";
+	
+}
+
+ ostream& Navire::afficher() const 
+{
+	cout << "navire en " << position_ << " battant pavillon " << pavillon_<< ", " << etat_ ; 
+	
 }
 
 /*******************************************
