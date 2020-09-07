@@ -134,7 +134,29 @@ void Coordonnees::operator+=(Coordonnees const& autre)
 
 }
 
+class Pirate : public Navire
+{
+  public:
+  Pirate(int x, int y, Pavillon pavillonIn) :Navire( x,  y, pavillonIn){}
 
+};
+class Marchand : public Navire
+{
+  public:
+  Marchand(int x, int y, Pavillon pavillonIn) :Navire( x,  y, pavillonIn){}
+
+};
+
+class Felon : public Marchand, public Pirate
+{
+  public:
+  using Navire::pavillon_;
+    using Navire::etat_;
+using Navire::position_;
+
+  Felon(int x, int y, Pavillon pavillonIn) :Marchand( x,  y, pavillonIn),Pirate( x,  y, pavillonIn) {}
+
+};
 /*******************************************
  * Ne rien modifier après cette ligne.
  *******************************************/
