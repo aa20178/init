@@ -32,16 +32,15 @@ class Navire
   /*****************************************************
    * Compléter le code à partir d'ici
    *****************************************************/
-
 public:
+
 
 Pavillon pavillon_;
 Etat etat_;
 Coordonnees position_;
+static int rayon_rencontre;
+
 Navire(int x, int y, Pavillon pavillonIn) : position_(x,y), pavillon_(pavillonIn), etat_(Intact) {}
-
-ostream& afficher() const ;
-
 
 
 Coordonnees position() const
@@ -63,34 +62,18 @@ void renflouer()
 		etat_= Intact;
 }
 
+ostream& afficher(ostream& os) const ;
 
 
 
 };
 
 
-
-void Coordonnees::operator+=(Coordonnees const& autre)
+ ostream& operator<<(ostream& os, Coordonnees const& autre)
 {
-	 x_ = x_ + autre.x() ;
-	 y_ = y_ + autre.y() ;
-
-}
-
-double distance(const Coordonnees& ship1,const Coordonnees& ship2) 
-{
-	double terme1 = (ship1.x() - ship2.x()) *(ship1.x() - ship2.x());
-		double terme2 = (ship1.y() - ship2.y()) *(ship1.y() - ship2.y());
-
-	return sqrt( terme1+terme2) ; 
+	os << "(" << autre.x() <<", " << autre.y() << ")";
 	
 }
-double distance(const Navire& n1, const Navire& n2) 
-{
-	return distance(n1.position_,n2.position_) ;
-}
-
-
  ostream& operator<<(ostream& os, Pavillon const& autre)
 {
 	if(autre==JollyRogers) 
@@ -116,17 +99,41 @@ double distance(const Navire& n1, const Navire& n2)
 	
 }
 
- ostream& operator<<(ostream& os, Coordonnees const& autre)
+
+double distance(const Coordonnees& ship1,const Coordonnees& ship2) 
 {
-	os << "(" << autre.x() <<", " << autre.y() << ")";
+	double terme1 = (ship1.x() - ship2.x()) *(ship1.x() - ship2.x());
+		double terme2 = (ship1.y() - ship2.y()) *(ship1.y() - ship2.y());
+
+	return sqrt( terme1+terme2) ; 
 	
 }
 
- ostream& Navire::afficher() const 
+
+ostream& Navire::afficher(ostream& os) const 
 {
-	cout << "navire en " << position_ << " battant pavillon " << pavillon_<< ", " << etat_ ; 
-	
+	os << "navire en " << position_ << " battant pavillon " << pavillon_<< ", " << etat_ ; 
+	return os; 
 }
+
+double distance(const Navire& n1, const Navire& n2) 
+{
+	return distance(n1.position_,n2.position_) ;
+}
+ ostream& operator<<(ostream& os, Navire const& autre)
+{
+	return autre.afficher(os) ;
+}
+
+int Navire::rayon_rencontre(10);
+
+void Coordonnees::operator+=(Coordonnees const& autre)
+{
+	 x_ = x_ + autre.x() ;
+	 y_ = y_ + autre.y() ;
+
+}
+
 
 /*******************************************
  * Ne rien modifier après cette ligne.
