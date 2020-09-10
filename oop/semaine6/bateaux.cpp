@@ -58,12 +58,13 @@ void avancer(int de_x, int de_y)
 		position_ += c;
 	}
 }
+
 void renflouer() 
 {
 		etat_= Intact;
 }
 
-ostream& afficher(ostream& os) const ;
+virtual ostream& afficher(ostream& os) const ;
 
 virtual void attaque(Navire&) = 0;
 
@@ -103,7 +104,7 @@ virtual void est_touche() = 0;
 	else if (autre==Endommage)
 		os << "ayant subi des dommages";
 	else if (autre==Coule)
-		os << "coule";
+		os << "coulé";
 	else os << "état inconnu";
 		
 	
@@ -120,9 +121,9 @@ double distance(const Coordonnees& ship1,const Coordonnees& ship2)
 }
 
 
-ostream& Navire::afficher(ostream& os) const 
+ ostream& Navire::afficher(ostream& os) const 
 {
-	os << "navire en " << position_ << " battant pavillon " << pavillon_<< ", " << etat_ ; 
+	os << " en " << position_ << " battant pavillon " << pavillon_<< ", " << etat_ ; 
 	return os; 
 }
 
@@ -137,10 +138,12 @@ double distance(const Navire& n1, const Navire& n2)
 
  void Navire::rencontrer(Navire& autre) 
 {
-	if(etat_!=Coule && autre.etat_!=Coule && (pavillon_!= autre.pavillon_)&& (distance(*this, autre) < Navire::rayon_rencontre))
-		attaque(autre);
-		autre.replique(*this);
-	
+	if(etat_!=Coule&&autre.etat_!=Coule&&
+    (pavillon_!= autre.pavillon_)&&(distance(*this, autre) < Navire::rayon_rencontre))
+		{
+      attaque(autre);
+		  autre.replique(*this);
+    }
 }
 
 int Navire::rayon_rencontre(10);
@@ -158,17 +161,18 @@ class Pirate : public virtual Navire
   Pirate(int x, int y, Pavillon pavillonIn) :Navire( x,  y, pavillonIn){}
 virtual void attaque(Navire& autre) override
 {
-	cout << "A l'abordage !" ;
+  if(etat_!=Coule)
+  {
+	cout << "A l'abordage !\n" ;
 	autre.est_touche();
-
-	
+  }
 }
 
 virtual void replique(Navire& autre) override
 { 
 	if (etat_!=Coule)
 	{
-	cout << "Non mais, ils nous attaquent ! On riposte !!" ;
+	cout << "Non mais, ils nous attaquent ! On riposte !!\n" ;
 	attaque(autre);
 	}
 }
@@ -189,12 +193,30 @@ virtual void est_touche() override
 
 
 
+ostream& afficher(ostream& os) const override
+{
+	os << "bateau pirate" ;//
+ Navire::afficher(os) ; 
+	return os; 
+}
+
+
+
+
+
 };
 class Marchand : public virtual Navire
 {
   public:
   Marchand(int x, int y, Pavillon pavillonIn) :Navire( x,  y, pavillonIn){}
 
+
+ostream& afficher(ostream& os) const override
+{
+	os << "navire marchand" ;//
+ Navire::afficher(os) ; 
+	return os; 
+}
 
 
 
@@ -208,7 +230,8 @@ virtual void est_touche() override
 
 virtual void attaque(Navire& autre) override
 {
-	cout << "On vous aura ! (insultes)" ;
+  if(etat_!=Coule)
+	cout << "On vous aura ! (insultes)\n" ;
 	
 }
 
@@ -216,10 +239,10 @@ virtual void replique(Navire& autre) override
 { 
 	if (etat_==Coule)
 	{
-	cout << "SOS je coule !" ;
+	cout << "SOS je coule !\n" ;
 	attaque(autre);
 	}
-	else cout << "Même pas peur !" ;
+	else cout << "Même pas peur !\n" ;
 }
 
 
@@ -253,7 +276,23 @@ virtual void est_touche() override
 {
 	Pirate::est_touche();
 
-}	
+}
+
+
+ostream& afficher(ostream& os) const override
+{
+	os << "navire félon" ;//
+ Navire::afficher(os) ; 
+	return os; 
+}
+
+
+/*
+ostream& afficher(ostream& os) const 
+{
+	os << "bateau félon en " << position_ << " battant pavillon " << pavillon_<< ", " << etat_ ; 
+	return os; 
+} */
 
 
 };
