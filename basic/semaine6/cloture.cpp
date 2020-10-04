@@ -99,7 +99,7 @@ void effacer_etangs(Carte &carte)
       }
     }
   }
-  affiche(carte);
+  //affiche(carte);
 }
 
 
@@ -154,11 +154,11 @@ int longueur_cloture(Carte &carte)
       }
 
     }
-        cout << " cloture= " << c <<"\n" ; 
   }
-      
+    cout << " cloture ligne " << i << ":"<<c <<"\n" ; 
+
   }
-  return c;
+  return c*2.5;
 }
 
 bool binaire(Carte const &carte)
