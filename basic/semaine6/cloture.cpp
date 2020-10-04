@@ -246,12 +246,19 @@ int main()
       {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
+
+  Carte carte2 = {
+      {0, 1, 1,1 , 0, 0},
+      {0, 1, 1,1 , 0, 0},
+      {0, 1, 1,1 , 0, 0},
+};
+
   cout << "Carte au départ :" << endl;
-  affiche(carte);
-  if (verifie_et_modifie(carte)) {
+  affiche(carte2);
+  if (verifie_et_modifie(carte2)) {
     cout << "Carte après modification :" << endl;
-    affiche(carte);
-    cout << "Il vous faut " << longueur_cloture(carte)
+    affiche(carte2);
+    cout << "Il vous faut " << longueur_cloture(carte2)
          << " mètres de clôture pour votre terrain."
          << endl;
   }
