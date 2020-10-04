@@ -34,7 +34,19 @@ void affiche(Carte const &carte)
     cout << endl;
   }
 }
-
+void reverse_array(vector<int>& arr, int end)
+{
+    int start = 0 ;
+    while (start < end)
+    {
+        int temp = arr[start]; 
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    } 
+}     
+ 
 int debut_ligne(vector<int> v)
 {
   for (int j(0); j < v.size(); j++)
@@ -59,13 +71,12 @@ Carte baliser_etangs(Carte const &carte)
     int index_de_debut_de_ligne = debut_ligne(carte[i]); // correspond a l'index du premier "un"
 
     vector<int> reverse_ligne = carte[i];
-    std::reverse(reverse_ligne.begin(), reverse_ligne.end());
-
+    reverse_array(reverse_ligne, reverse_ligne.size() -1);
     int index_de_fin_de_ligne = reverse_ligne.size() - debut_ligne(reverse_ligne) - 1; // correspond a l'index du dernier "un"
 
     carte_debut_fin[i].push_back(index_de_debut_de_ligne);
     carte_debut_fin[i].push_back(index_de_fin_de_ligne);
-    //cout << "ligne " << i << " : debut : " << index_de_debut_de_ligne << " fin : " << index_de_fin_de_ligne << endl;
+    cout << "ligne " << i << " : debut : " << index_de_debut_de_ligne << " fin : " << index_de_fin_de_ligne << endl;
   }
   //affiche(carte_debut_fin);
   return carte_debut_fin;
@@ -91,6 +102,65 @@ void effacer_etangs(Carte &carte)
   affiche(carte);
 }
 
+
+int longueur_cloture(Carte &carte)
+{
+    Carte cartebalisee = baliser_etangs(carte);
+  
+  int c=0;
+  for (int i = 0; i < carte.size(); i++)
+  {
+    for (int j= cartebalisee[i][0]; j < cartebalisee[i][1]+1; j++)
+    {
+        
+      if( i ==carte.size() -1 && carte[i][j] == 1)
+      {
+          c++;
+      }
+      else if(i==0 && carte[i][j] == 1)
+      {
+        c++;
+      }
+      
+      if(i>0)
+      {
+         if(carte[i][j] == 1 && carte[i-1][j] == 0)
+        {
+           c++; 
+        }
+     
+     if(i<carte.size()-1)
+      {
+         if(carte[i][j] == 1 && carte[i+1][j] == 0)
+        {
+           c++; 
+        }
+      }
+      
+    if(j<cartebalisee[i][1])
+      {
+         if(carte[i][j] == 1 && carte[i][j+1] == 0)
+        {
+           c++; 
+        }
+      }
+      
+          if(j>cartebalisee[i][0])
+      {
+         if(carte[i][j] == 1 && carte[i][j-1] == 0)
+        {
+           c++; 
+        }
+      }
+
+    }
+        cout << " cloture= " << c <<"\n" ; 
+  }
+      
+  }
+  return c;
+}
+
 bool binaire(Carte const &carte)
 {
 
@@ -102,6 +172,8 @@ bool binaire(Carte const &carte)
       {
         return false;
       }
+      
+      
     }
   }
   return true;
